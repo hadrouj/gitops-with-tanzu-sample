@@ -1,0 +1,26 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: core
+  namespace: gitops-with-tanzu
+spec:
+  packageRef:
+    refName: core.gitops-with-tanzu.github.com
+    versionSelection:
+      constraints: ">=1.0.0"
+  serviceAccountName: gitops-with-tanzu-sa
+  values:
+  - secretRef:
+      name: core-values
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: core-values
+  namespace: gitops-with-tanzu
+type: Opaque
+stringData:
+  values.yml: |
+    metallb:
+      addresses:
+      - 10.213.73.23-10.213.73.23

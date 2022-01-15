@@ -1,0 +1,37 @@
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: yelb
+  namespace: gitops-with-tanzu
+spec:
+  serviceAccountName: gitops-with-tanzu-sa
+  fetch:
+  - imgpkgBundle:
+      image: ghcr.io/alexandreroman/yelb-app
+  template:
+  - ytt:
+      paths:
+      - config
+      - config-ext/ingress.yml
+      - config-env/prod
+      valuesFrom:
+      - secretRef:
+          name: yelb-values
+  - kbld:
+      paths:
+      - "-"
+      - .imgpkg/images.yml
+  deploy:
+  - kapp: {}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: yelb-values
+  namespace: gitops-with-tanzu
+type: Opaque
+stringData:
+  data.yml: |
+    APP: yelb
+    NAMESPACE: yelb
+    DOMAIN: yelb.10.213.169.90.nip.io

@@ -1,0 +1,28 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: monitoring
+  namespace: gitops-with-tanzu
+spec:
+  packageRef:
+    refName: monitoring.gitops-with-tanzu.github.com
+    versionSelection:
+      constraints: ">=1.0.0"
+  serviceAccountName: gitops-with-tanzu-sa
+  values:
+  - secretRef:
+      name: monitoring-values
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: monitoring-values
+  namespace: gitops-with-tanzu
+type: Opaque
+stringData:
+  values.yml: |
+    grafana:
+      admin:
+        password: changeme
+      ingress:
+        host: grafana.10.213.73.22.nip.io
