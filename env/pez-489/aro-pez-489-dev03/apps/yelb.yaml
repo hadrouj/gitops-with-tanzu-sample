@@ -7,7 +7,7 @@ spec:
   serviceAccountName: gitops-with-tanzu-sa
   fetch:
   - imgpkgBundle:
-      image: ghcr.io/alexandreroman/yelb-app
+      image: ghcr.io/hadrouj/yelb-app
   template:
   - ytt:
       paths:

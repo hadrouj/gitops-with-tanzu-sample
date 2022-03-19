@@ -11,7 +11,7 @@ metadata:
 spec:
   fetch:
     imgpkgBundle:
-      image: ghcr.io/alexandreroman/gitops-with-tanzu-repo:stable
+      image: ghcr.io/hadrouj/gitops-with-tanzu-repo:stable
 ---
 apiVersion: v1
 kind: ServiceAccount

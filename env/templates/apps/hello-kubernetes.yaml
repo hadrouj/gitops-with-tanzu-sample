@@ -70,7 +70,7 @@ stringData:
     deployment:
       container:
         image:
-          repository: ghcr.io/alexandreroman/hello-kubernetes
+          repository: ghcr.io/hadrouj/hello-kubernetes
           tag: "1.10"
     service:
       type: ClusterIP
